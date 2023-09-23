@@ -1,8 +1,5 @@
 import { Navbar } from "flowbite-react";
-import { useNavigate } from "react-router-dom";
 export default function NavbarWithDropdown() {
-  const navigate = useNavigate();
-
   return (
     <Navbar fluid rounded>
       <Navbar.Brand>

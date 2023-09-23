@@ -1,6 +1,6 @@
 import { Label, Select } from "flowbite-react";
 
-export default function DefaultDropdown(props) {
+export default function DefaultDropdown(props: any) {
   let { title, options, id } = props;
   return (
     <div className="max-w-md" id="select">
