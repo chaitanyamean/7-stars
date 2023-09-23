@@ -97,7 +97,7 @@ export const RaiseAnOrder = () => {
   ];
 
   return (
-    <div className="m-4">
+    <div className="m-4 flex justify-center">
       <form className="flex max-w-md flex-col gap-4">
         <div>
           <div className="mb-2 block">
