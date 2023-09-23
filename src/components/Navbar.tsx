@@ -1,12 +1,8 @@
-import { Dropdown, Navbar } from "flowbite-react";
+import { Navbar } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
-// import {img} from '../assets/l'
 export default function NavbarWithDropdown() {
   const navigate = useNavigate();
 
-  const handleNavClick = () => {
-    navigate("/raiseanorder");
-  };
   return (
     <Navbar fluid rounded>
       <Navbar.Brand>
@@ -21,14 +17,6 @@ export default function NavbarWithDropdown() {
           7 - Stars Bakery
         </span>
       </Navbar.Brand>
-      {/* <div className="flex md:order-2">
-        <Navbar.Toggle />
-      </div>
-      <Navbar.Collapse>
-        <Navbar.Link active onClick={handleNavClick}>
-          Raise An Order
-        </Navbar.Link>
-      </Navbar.Collapse> */}
     </Navbar>
   );
 }
