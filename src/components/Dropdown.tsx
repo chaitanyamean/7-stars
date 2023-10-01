@@ -3,8 +3,7 @@ import { Label, Select } from "flowbite-react";
 export default function DefaultDropdown(props: any) {
   const { title, options, id, handleOnChange } = props;
 
-  const handleChange = (e) => {
-    console.log(e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     handleOnChange(e.target.value);
   };
 

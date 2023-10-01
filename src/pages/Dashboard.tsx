@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Table } from "flowbite-react";
 import axios from "axios";
 // const Dashboard = () => {

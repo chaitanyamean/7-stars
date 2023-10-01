@@ -1,11 +1,5 @@
 import { useState } from "react";
-import {
-  Button,
-  Label,
-  TextInput,
-  FileInput,
-  Datepicker,
-} from "flowbite-react";
+import { Button, Label, TextInput, FileInput } from "flowbite-react";
 import DefaultDropdown from "../components/Dropdown";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -111,12 +105,7 @@ export const RaiseAnOrder = () => {
     },
   ];
 
-  const handleImagePreview = (e) => {
-    const image_as_files = e.target.files[0];
-    console.log(image_as_files);
-  };
-
-  const onSubmit = (e: any) => {
+  const onSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     if (e) {
       e.preventDefault();
       console.log(data);
@@ -153,7 +142,9 @@ export const RaiseAnOrder = () => {
             id="name"
             placeholder="Your Name"
             type="text"
-            onChange={(e) => setData({ ...data, name: e.target.value })}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setData({ ...data, name: e.target.value })
+            }
           />
         </div>
 
@@ -166,7 +157,9 @@ export const RaiseAnOrder = () => {
             placeholder="Your Number"
             required
             type="number"
-            onChange={(e) => setData({ ...data, mobile: e.target.value })}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setData({ ...data, mobile: e.target.value })
+            }
           />
         </div>
 
@@ -178,7 +171,7 @@ export const RaiseAnOrder = () => {
             helperText="A cake picture you liked"
             id="file"
             name="samplefile"
-            onChange={(e) => {
+            onChange={(e: any) => {
               console.log(e.target.files[0]);
               setData({ ...data, image: e.target.files[0] });
             }}
@@ -191,7 +184,9 @@ export const RaiseAnOrder = () => {
               title="Select Flavours"
               options={flavours}
               id="flavoursId"
-              handleOnChange={(e) => setData({ ...data, flavourType: e })}
+              handleOnChange={(e: string) =>
+                setData({ ...data, flavourType: e })
+              }
             />
           </div>
         </div>
@@ -201,7 +196,7 @@ export const RaiseAnOrder = () => {
             <DefaultDropdown
               title="Kgs"
               options={kgsOptions}
-              handleOnChange={(e) => setData({ ...data, quantity: e })}
+              handleOnChange={(e: string) => setData({ ...data, quantity: e })}
             />
           </div>
         </div>
@@ -211,7 +206,7 @@ export const RaiseAnOrder = () => {
             <DefaultDropdown
               title="Select Location"
               options={locations}
-              handleOnChange={(e) => setData({ ...data, location: e })}
+              handleOnChange={(e: string) => setData({ ...data, location: e })}
             />
           </div>
         </div>
@@ -223,7 +218,7 @@ export const RaiseAnOrder = () => {
           {/* <Datepicker title="" onChange={(e) => console.log(e.target.value)} /> */}
           <DatePicker
             selected={data.date}
-            onChange={(date) => setData({ ...data, date: date })}
+            onChange={(date: Date) => setData({ ...data, date: date })}
           />
         </div>
 
