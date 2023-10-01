@@ -5,7 +5,11 @@ export default {
     "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      maxWidth: {
+        "1/2": "50%",
+      },
+    },
   },
   // eslint-disable-next-line no-undef
   plugins: [require("flowbite/plugin")],

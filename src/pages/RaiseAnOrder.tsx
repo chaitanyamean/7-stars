@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Button,
   Label,
@@ -6,9 +7,23 @@ import {
   Datepicker,
 } from "flowbite-react";
 import DefaultDropdown from "../components/Dropdown";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import axios from "axios";
 
 export const RaiseAnOrder = () => {
-  let flavours = [
+  const [data, setData] = useState({
+    name: "",
+    mobile: "",
+    image: {},
+    flavourType: "",
+    quantity: "",
+    location: "",
+    date: new Date(),
+    comments: "",
+    address: "",
+  });
+  const flavours = [
     {
       id: "1",
       name: "Chocolate",
@@ -19,14 +34,14 @@ export const RaiseAnOrder = () => {
     },
     {
       id: "3",
-      name: "Vannilla",
+      name: "Vanilla",
     },
     {
       id: "4",
       name: "Rasmalai",
     },
   ];
-  let kgsOptions = [
+  const kgsOptions = [
     {
       id: "1",
       name: "1kg",
@@ -49,7 +64,7 @@ export const RaiseAnOrder = () => {
     },
   ];
 
-  let locations = [
+  const locations = [
     {
       id: "1",
       name: "Ameenpur",
@@ -96,14 +111,50 @@ export const RaiseAnOrder = () => {
     },
   ];
 
+  const handleImagePreview = (e) => {
+    const image_as_files = e.target.files[0];
+    console.log(image_as_files);
+  };
+
+  const onSubmit = (e: any) => {
+    if (e) {
+      e.preventDefault();
+      console.log(data);
+      const payload = {
+        name: data.name,
+        mobile: data.mobile,
+        image: data.image,
+        flavourType: data.flavourType,
+        quantity: data.quantity,
+        location: data.location,
+        date: data.date,
+        comments: data.comments,
+        address: data.address,
+      };
+      console.log(payload);
+      axios
+        .post("https://sevenstarbakers.onrender.com/raiseanorder", payload, {
+          headers: {
+            "Content-type": "multipart/form-data",
+          },
+        })
+        .then((res) => console.log(res));
+    }
+  };
+
   return (
     <div className="m-4 flex justify-center">
-      <form className="flex max-w-md flex-col gap-4">
+      <form className="flex max-w-md flex-col gap-4" onSubmit={onSubmit}>
         <div>
           <div className="mb-2 block">
             <Label htmlFor="name" value="Name" />
           </div>
-          <TextInput id="name" placeholder="Your Name" type="text" />
+          <TextInput
+            id="name"
+            placeholder="Your Name"
+            type="text"
+            onChange={(e) => setData({ ...data, name: e.target.value })}
+          />
         </div>
 
         <div>
@@ -115,6 +166,7 @@ export const RaiseAnOrder = () => {
             placeholder="Your Number"
             required
             type="number"
+            onChange={(e) => setData({ ...data, mobile: e.target.value })}
           />
         </div>
 
@@ -122,7 +174,15 @@ export const RaiseAnOrder = () => {
           <div className="mb-2 block">
             <Label htmlFor="file" value="Upload image" />
           </div>
-          <FileInput helperText="A cake picture you liked" id="file" />
+          <FileInput
+            helperText="A cake picture you liked"
+            id="file"
+            name="samplefile"
+            onChange={(e) => {
+              console.log(e.target.files[0]);
+              setData({ ...data, image: e.target.files[0] });
+            }}
+          />
         </div>
 
         <div className="max-w-md" id="flavoursId">
@@ -131,19 +191,28 @@ export const RaiseAnOrder = () => {
               title="Select Flavours"
               options={flavours}
               id="flavoursId"
+              handleOnChange={(e) => setData({ ...data, flavourType: e })}
             />
           </div>
         </div>
 
         <div className="max-w-md" id="kgsOptionsId">
           <div className="mb-2 block">
-            <DefaultDropdown title="Kgs" options={kgsOptions} />
+            <DefaultDropdown
+              title="Kgs"
+              options={kgsOptions}
+              handleOnChange={(e) => setData({ ...data, quantity: e })}
+            />
           </div>
         </div>
 
         <div className="max-w-md" id="kgsOptionsId">
           <div className="mb-2 block">
-            <DefaultDropdown title="Select Location" options={locations} />
+            <DefaultDropdown
+              title="Select Location"
+              options={locations}
+              handleOnChange={(e) => setData({ ...data, location: e })}
+            />
           </div>
         </div>
 
@@ -151,14 +220,37 @@ export const RaiseAnOrder = () => {
           <div className="mb-2 block">
             <Label value="Select date" />
           </div>
-          <Datepicker title="" />
+          {/* <Datepicker title="" onChange={(e) => console.log(e.target.value)} /> */}
+          <DatePicker
+            selected={data.date}
+            onChange={(date) => setData({ ...data, date: date })}
+          />
         </div>
 
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="comments" value="Comments" />
+            <Label htmlFor="comments" value="Additional Details" />
           </div>
-          <TextInput id="comments" required type="text" sizing="lg" />
+          <TextInput
+            id="comments"
+            required
+            type="text"
+            sizing="lg"
+            onChange={(e) => setData({ ...data, comments: e.target.value })}
+          />
+        </div>
+
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="address" value="Full Address" />
+          </div>
+          <TextInput
+            id="address"
+            required
+            type="text"
+            sizing="lg"
+            onChange={(e) => setData({ ...data, address: e.target.value })}
+          />
         </div>
 
         <Button type="submit">Submit</Button>
