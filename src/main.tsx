@@ -1,12 +1,12 @@
 import App from "./App.tsx";
 import "./index.css";
 import { createRoot } from "react-dom/client";
-
-// React.createRoot(document.getElementById("root")!).render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>
-// );
+import { Provider } from "react-redux";
+import store from "./store";
 
 const root = createRoot(document.getElementById("root")!); // notice the '!'
-root.render(<App />);
+root.render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+);

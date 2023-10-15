@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Table } from "flowbite-react";
+
 import axios from "axios";
 // const Dashboard = () => {
 //   return <div>Dashboard</div>;
@@ -10,8 +11,11 @@ import axios from "axios";
 export default function Dashboard() {
   const [data, setData] = useState([]);
 
+  // const ordersData = useLoaderData();
+  // console.log(ordersData);
   useEffect(() => {
-    axios.get("https://sevenstarbakers.onrender.com/getorders").then((res) => {
+    // console.log(import.meta.env.VITE_API_KEY + "/getOrders");
+    axios.get(`${import.meta.env.VITE_API_KEY}/getorders`).then((res) => {
       if (res && res.data && res.data.length > 0) {
         setData(res.data);
       }
@@ -51,9 +55,9 @@ export default function Dashboard() {
                   <Table.Cell>{item.date}</Table.Cell>
                   <Table.Cell>{item.location}</Table.Cell>
                   <Table.Cell>{item.address}</Table.Cell>
-                  <Table.Cell>
+                  {/* <Table.Cell>
                     <img src={item.image} className="h-auto w-40" />
-                  </Table.Cell>
+                  </Table.Cell> */}
                 </Table.Row>
               );
             })}

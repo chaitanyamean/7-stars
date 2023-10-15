@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Label, TextInput, FileInput } from "flowbite-react";
+import { Button, Label, TextInput, FileInput, Textarea } from "flowbite-react";
 import DefaultDropdown from "../components/Dropdown";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -121,8 +121,9 @@ export const RaiseAnOrder = () => {
         address: data.address,
       };
       console.log(payload);
+      //`${import.meta.env.VITE_API_KEY}/getorders`
       axios
-        .post("https://sevenstarbakers.onrender.com/raiseanorder", payload, {
+        .post(`${import.meta.env.VITE_API_KEY}/raiseanorder`, payload, {
           headers: {
             "Content-type": "multipart/form-data",
           },
@@ -226,11 +227,10 @@ export const RaiseAnOrder = () => {
           <div className="mb-2 block">
             <Label htmlFor="comments" value="Additional Details" />
           </div>
-          <TextInput
+          <Textarea
             id="comments"
             required
-            type="text"
-            sizing="lg"
+            rows={4}
             onChange={(e) => setData({ ...data, comments: e.target.value })}
           />
         </div>
@@ -239,11 +239,10 @@ export const RaiseAnOrder = () => {
           <div className="mb-2 block">
             <Label htmlFor="address" value="Full Address" />
           </div>
-          <TextInput
+          <Textarea
             id="address"
             required
-            type="text"
-            sizing="lg"
+            rows={4}
             onChange={(e) => setData({ ...data, address: e.target.value })}
           />
         </div>
