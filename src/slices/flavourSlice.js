@@ -21,7 +21,6 @@ const flavourSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(fetchFlavours.fulfilled, (state, action) => {
-      console.log("Action", action);
       state.loading = false;
       state.flavour = action.payload;
       state.error = "";

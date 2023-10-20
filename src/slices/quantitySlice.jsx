@@ -21,7 +21,6 @@ const quantitySlice = createSlice({
       state.loading = true;
     });
     builder.addCase(fetchQuantites.fulfilled, (state, action) => {
-      console.log("Action", action);
       state.loading = false;
       state.quantity = action.payload;
       state.error = "";

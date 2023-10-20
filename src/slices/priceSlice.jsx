@@ -21,7 +21,6 @@ const priceSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(fetchPrices.fulfilled, (state, action) => {
-      console.log("Action", action);
       state.loading = false;
       state.prices = action.payload;
       state.error = "";

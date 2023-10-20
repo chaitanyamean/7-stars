@@ -1,18 +1,19 @@
 import { Label, Select } from "flowbite-react";
 
 export default function DefaultDropdown(props: any) {
-  const { title, options, id, handleOnChange, keys } = props;
+  const { title, options, id, handleOnChange, keys, value } = props;
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     handleOnChange(e.target.value);
   };
   // const getKey = () => {};
   return (
-    <div className="max-w-md" id="select">
+    <div id="select">
       <div className="mb-2 block">
         <Label htmlFor={id} value={title} />
       </div>
-      <Select id={id} required onChange={handleChange}>
+      <Select id={id} required onChange={handleChange} value={value}>
+        <option key="pleaseselect">Please Select</option>
         {options &&
           options.length > 0 &&
           options.map((item: any) => (

@@ -9,6 +9,9 @@ export default {
       maxWidth: {
         "1/2": "50%",
       },
+      spacing: {
+        "1rem": "1rem",
+      },
     },
   },
   // eslint-disable-next-line no-undef
