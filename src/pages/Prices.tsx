@@ -69,7 +69,7 @@ const Prices = () => {
       };
       if (btnTitle == "Submit") {
         axios
-          .post(`${import.meta.env.VITE_API_KEY}/addprices`, payload)
+          .post(`https://sevenstarbakers.onrender.com/addprices`, payload)
           .then((response) => {
             console.log(response);
             if (response && response.status == 200) {
@@ -90,7 +90,7 @@ const Prices = () => {
         setBtnTitle("Submit");
 
         axios
-          .put(`${import.meta.env.VITE_API_KEY}/editprices`, payload)
+          .put(`https://sevenstarbakers.onrender.com/editprices`, payload)
           .then((response) => {
             console.log(response);
             if (response && response.status == 200) {
@@ -129,7 +129,7 @@ const Prices = () => {
     if (e) {
       e.preventDefault();
       axios
-        .delete(`${import.meta.env.VITE_API_KEY}/deletePrice/${priceId}`)
+        .delete(`https://sevenstarbakers.onrender.com/deletePrice/${priceId}`)
         .then((response) => {
           if (response && response.status == 200) {
             dispatch(fetchPrices());

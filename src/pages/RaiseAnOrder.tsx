@@ -114,7 +114,7 @@ export const RaiseAnOrder = () => {
       };
       console.log(payload);
       axios
-        .post(`${import.meta.env.VITE_API_KEY}/raiseanorder`, payload, {
+        .post(`https://sevenstarbakers.onrender.com/raiseanorder`, payload, {
           headers: {
             "Content-type": "multipart/form-data",
           },
@@ -164,7 +164,10 @@ export const RaiseAnOrder = () => {
     };
     if (data.quantity && data.flavourType) {
       axios
-        .post(`${import.meta.env.VITE_API_KEY}/getpricebyquantity`, payload)
+        .post(
+          `https://sevenstarbakers.onrender.com/getpricebyquantity`,
+          payload
+        )
         .then((res) => {
           if (res && res.status == 200) {
             if (res.data && res.data.length > 0) {
