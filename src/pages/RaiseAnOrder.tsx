@@ -27,7 +27,7 @@ export const RaiseAnOrder = () => {
   const [isLoading, setLoading] = useState(false);
   const [text, setText] = useState("");
   const [isPrice, setPrice] = useState(false);
-
+  const [success, setSuccess] = useState("");
   const dispatch = useDispatch<AppDispatch>();
   console.log("quantitySlice", quantitySlice);
   const [data, setData] = useState({
@@ -40,6 +40,7 @@ export const RaiseAnOrder = () => {
     date: new Date(),
     comments: "",
     address: "",
+    price: "",
   });
 
   const locations = [
@@ -110,9 +111,9 @@ export const RaiseAnOrder = () => {
         date: data.date,
         comments: data.comments,
         address: data.address,
+        price: text,
       };
       console.log(payload);
-      //`${import.meta.env.VITE_API_KEY}/getorders`
       axios
         .post(`${import.meta.env.VITE_API_KEY}/raiseanorder`, payload, {
           headers: {
@@ -123,10 +124,10 @@ export const RaiseAnOrder = () => {
           if (res && res.status == 200) {
             console.log("200");
             setLoading(false);
-            setText(
+            setSuccess(
               "Thank you for the order. We will keep you posted once the order is Accepted."
             );
-            // saved successfully
+            setText("");
             setData({
               name: "",
               mobile: "",
@@ -137,16 +138,16 @@ export const RaiseAnOrder = () => {
               date: new Date(),
               comments: "",
               address: "",
+              price: "",
             });
           } else {
             setLoading(false);
-            // saved successfully
-            setText("Some Error");
+            setSuccess("Some Error");
           }
         })
         .catch((error) => {
           setLoading(false);
-          setText("Some Error");
+          setSuccess("Some Error");
         });
     }
   };
@@ -185,10 +186,10 @@ export const RaiseAnOrder = () => {
       {!isLoading ? (
         <>
           <form className="flex max-w-md flex-col gap-4" onSubmit={onSubmit}>
-            {text ? (
+            {success ? (
               <Alert color="info">
                 <span>
-                  <p>{text}</p>
+                  <p>{success}</p>
                 </span>
               </Alert>
             ) : (
