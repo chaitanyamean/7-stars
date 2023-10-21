@@ -55,9 +55,16 @@ export default function Dashboard() {
                   <Table.Cell>{item.date}</Table.Cell>
                   <Table.Cell>{item.location}</Table.Cell>
                   <Table.Cell>{item.address}</Table.Cell>
-                  {/* <Table.Cell>
-                    <img src={item.image} className="h-auto w-40" />
-                  </Table.Cell> */}
+                  <Table.Cell>
+                    <a
+                      href={item.image}
+                      target="_blank"
+                      className="text-blue-600"
+                    >
+                      View
+                    </a>
+                    {/* <img src={item.image} className="h-auto w-40" /> */}
+                  </Table.Cell>
                 </Table.Row>
               );
             })}
