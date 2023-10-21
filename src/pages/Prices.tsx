@@ -12,7 +12,7 @@ import { HiInformationCircle } from "react-icons/hi";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import priceSlice, { fetchPrices } from "../slices/priceSlice";
+import { fetchPrices } from "../slices/priceSlice";
 import { fetchQuantites } from "../slices/quantitySlice";
 import { fetchFlavours } from "../slices/flavourSlice";
 
@@ -122,7 +122,7 @@ const Prices = () => {
   };
 
   const handleDelete = (
-    e: React.ChangeEvent<HTMLFormElement>,
+    e: React.MouseEvent<Element, MouseEvent>,
     priceId: string
   ) => {
     console.log(priceId);

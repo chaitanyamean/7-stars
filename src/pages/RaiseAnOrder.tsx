@@ -20,13 +20,12 @@ import { fetchFlavours } from "../slices/flavourSlice";
 import { AppDispatch } from "../store";
 
 export const RaiseAnOrder = () => {
-  const priceSlice = useSelector((state: any) => state.priceSlice);
+  // const priceSlice = useSelector((state: any) => state.priceSlice);
   const quantitySlice = useSelector((state: any) => state.quantitySlice);
   const flavourSlice = useSelector((state: any) => state.flavourSlice);
 
   const [isLoading, setLoading] = useState(false);
   const [text, setText] = useState("");
-  const [isPrice, setPrice] = useState(false);
   const [success, setSuccess] = useState("");
   const dispatch = useDispatch<AppDispatch>();
   console.log("quantitySlice", quantitySlice);
@@ -145,7 +144,7 @@ export const RaiseAnOrder = () => {
             setSuccess("Some Error");
           }
         })
-        .catch((error) => {
+        .catch(() => {
           setLoading(false);
           setSuccess("Some Error");
         });
@@ -177,7 +176,7 @@ export const RaiseAnOrder = () => {
             // saved successfully
           }
         })
-        .catch((error) => {});
+        .catch(() => {});
     }
   };
 
