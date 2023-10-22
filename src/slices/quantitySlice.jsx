@@ -9,7 +9,7 @@ const initialState = {
 
 export const fetchQuantites = createAsyncThunk("user/quantity", () => {
   return axios
-    .get(`https://sevenstarbakers.onrender.com/getallquanties`)
+    .get(`${import.meta.env.VITE_API_KEY}/getallquanties`)
     .then((response) => response.data);
 });
 

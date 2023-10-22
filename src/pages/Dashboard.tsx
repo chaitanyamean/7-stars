@@ -15,7 +15,7 @@ export default function Dashboard() {
   // console.log(ordersData);
   useEffect(() => {
     // console.log(import.meta.env.VITE_API_KEY + "/getOrders");
-    axios.get(`https://sevenstarbakers.onrender.com/getorders`).then((res) => {
+    axios.get(`${import.meta.env.VITE_API_KEY}/getorders`).then((res) => {
       if (res && res.data && res.data.length > 0) {
         setData(res.data);
       }

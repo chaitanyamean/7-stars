@@ -10,7 +10,7 @@ import Prices from "./pages/Prices";
 function App() {
   // const getData = () => {
   //   return axios
-  //     .get("https://sevenstarbakers.onrender.com/getorders")
+  //     .get("${import.meta.env.VITE_API_KEY}/getorders")
   //     .then((res) => {
   //       if (res && res.data && res.data.length > 0) {
   //         return res.data;
