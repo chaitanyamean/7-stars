@@ -15,6 +15,7 @@ export default function Dashboard() {
   // console.log(ordersData);
   useEffect(() => {
     // console.log(import.meta.env.VITE_API_KEY + "/getOrders");
+    console.log(import.meta.env.VITE_API_KEY);
     axios.get(`${import.meta.env.VITE_API_KEY}/getorders`).then((res) => {
       if (res && res.data && res.data.length > 0) {
         setData(res.data);
@@ -22,7 +23,7 @@ export default function Dashboard() {
     });
   }, []);
   return (
-    <div className="m-4 flex justify-center">
+    <div className="m-4 flex">
       <Table>
         <Table.Head>
           <Table.HeadCell>Name</Table.HeadCell>
@@ -44,9 +45,7 @@ export default function Dashboard() {
                   className="bg-white dark:border-gray-700 dark:bg-gray-800"
                   key={item.orderId}
                 >
-                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                    {item.name}
-                  </Table.Cell>
+                  <Table.Cell>{item.name}</Table.Cell>
                   <Table.Cell>{item.mobile}</Table.Cell>
                   <Table.Cell>{item.flavourType}</Table.Cell>
                   <Table.Cell>{item.quantity}</Table.Cell>
@@ -63,7 +62,6 @@ export default function Dashboard() {
                     >
                       View
                     </a>
-                    {/* <img src={item.image} className="h-auto w-40" /> */}
                   </Table.Cell>
                 </Table.Row>
               );

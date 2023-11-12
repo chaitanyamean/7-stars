@@ -6,6 +6,8 @@ import { Home } from "./pages/Home";
 import Admin from "./pages/Admin";
 import Dashboard from "./pages/Dashboard";
 import Prices from "./pages/Prices";
+import { Login } from "./pages/Login";
+
 // import axios from "axios";
 function App() {
   // const getData = () => {
@@ -25,6 +27,7 @@ function App() {
 
       <Routes>
         <Route path="/" Component={Home} />
+        <Route path="/login" Component={Login} />
         <Route path="/raiseanorder" Component={RaiseAnOrder} />
         <Route path="/admin" Component={Admin} />
         <Route path="/admin/dashboard" Component={Dashboard} />
