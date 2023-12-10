@@ -53,7 +53,7 @@ export const RaiseAnOrder = () => {
     },
     {
       id: "3",
-      name: "Berrumguda",
+      name: "Beeramguda",
     },
     {
       id: "4",
@@ -84,8 +84,12 @@ export const RaiseAnOrder = () => {
       name: "Bandhan kamavu",
     },
     {
-      id: "8",
+      id: "11",
       name: "Krishna reddy petha",
+    },
+    {
+      id: "12",
+      name: "Other",
     },
   ];
 
@@ -241,7 +245,7 @@ export const RaiseAnOrder = () => {
             <div className="max-w-md" id="locationId">
               <div className="mb-2 block">
                 <DefaultDropdown
-                  title="Select Location"
+                  title="Select Delivery Location"
                   options={locations}
                   keys={["id", "name"]}
                   handleOnChange={(e: string) =>

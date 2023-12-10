@@ -11,8 +11,6 @@ import axios from "axios";
 export default function Dashboard() {
   const [data, setData] = useState([]);
 
-  // const ordersData = useLoaderData();
-  // console.log(ordersData);
   useEffect(() => {
     // console.log(import.meta.env.VITE_API_KEY + "/getOrders");
     console.log(import.meta.env.VITE_API_KEY);
@@ -35,6 +33,7 @@ export default function Dashboard() {
           <Table.HeadCell>location</Table.HeadCell>
           <Table.HeadCell>address</Table.HeadCell>
           <Table.HeadCell>image</Table.HeadCell>
+          <Table.HeadCell>Total</Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
           {data &&
@@ -60,9 +59,10 @@ export default function Dashboard() {
                       target="_blank"
                       className="text-blue-600"
                     >
-                      View
+                      {item.image ? "View" : ""}
                     </a>
                   </Table.Cell>
+                  <Table.Cell>{item.price}</Table.Cell>
                 </Table.Row>
               );
             })}
