@@ -62,7 +62,7 @@ const Prices = () => {
       }
       let isFound = false;
       const pricesList = priceSlice.prices;
-      pricesList.forEach((item) => {
+      pricesList.forEach((item: any) => {
         if (
           item.flavourName == data.flavourName &&
           item.quantity == data.quantity
