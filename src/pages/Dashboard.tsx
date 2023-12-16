@@ -14,12 +14,33 @@ export default function Dashboard() {
   useEffect(() => {
     // console.log(import.meta.env.VITE_API_KEY + "/getOrders");
     console.log(import.meta.env.VITE_API_KEY);
+    getOrders();
+  }, []);
+
+  const getOrders = () => {
     axios.get(`${import.meta.env.VITE_API_KEY}/getorders`).then((res) => {
       if (res && res.data && res.data.length > 0) {
         setData(res.data);
       }
     });
-  }, []);
+  };
+
+  const updateOrderStatus = (status: string, orderId: string) => {
+    const payload = {
+      status,
+      orderId,
+    };
+    axios
+      .post(`${import.meta.env.VITE_API_KEY}/updateorder`, payload)
+      .then((res) => {
+        if (res && res.data) {
+          getOrders();
+        } else {
+          console.log("somthing error", res);
+        }
+      })
+      .catch((err) => console.log("ERR", err));
+  };
   return (
     <div className="m-4 flex">
       <Table>
@@ -34,6 +55,7 @@ export default function Dashboard() {
           <Table.HeadCell>address</Table.HeadCell>
           <Table.HeadCell>image</Table.HeadCell>
           <Table.HeadCell>Total</Table.HeadCell>
+          <Table.HeadCell>Status</Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
           {data &&
@@ -63,6 +85,30 @@ export default function Dashboard() {
                     </a>
                   </Table.Cell>
                   <Table.Cell>{item.price}</Table.Cell>
+                  <Table.Cell>
+                    {item.status ? (
+                      item.status.toUpperCase()
+                    ) : (
+                      <>
+                        <a
+                          onClick={() =>
+                            updateOrderStatus("Confirm", item.orderId)
+                          }
+                          className="text-blue-600 cursor-pointer"
+                        >
+                          Confirm
+                        </a>
+                        <a
+                          onClick={() =>
+                            updateOrderStatus("Reject", item.orderId)
+                          }
+                          className="text-red-600 ml-2 cursor-pointer"
+                        >
+                          Reject
+                        </a>
+                      </>
+                    )}
+                  </Table.Cell>
                 </Table.Row>
               );
             })}
