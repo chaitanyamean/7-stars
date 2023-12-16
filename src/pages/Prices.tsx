@@ -45,7 +45,7 @@ const Prices = () => {
   const onSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     if (e) {
       e.preventDefault();
-      console.log(data);
+      console.log("priceSlice", data, priceSlice);
 
       if (
         data.flavourName === "Please Select" &&
@@ -60,52 +60,65 @@ const Prices = () => {
         setErrorMessage("Please select Kgs");
         return;
       }
+      let isFound = false;
+      const pricesList = priceSlice.prices;
+      pricesList.forEach((item) => {
+        if (
+          item.flavourName == data.flavourName &&
+          item.quantity == data.quantity
+        ) {
+          isFound = true;
+        }
+      });
+      if (!isFound) {
+        const payload = {
+          flavourName: data.flavourName,
+          quantity: data.quantity,
+          price: data.price,
+          priceId: "",
+        };
+        if (btnTitle == "Submit") {
+          axios
+            .post(`${import.meta.env.VITE_API_KEY}/addprices`, payload)
+            .then((response) => {
+              console.log(response);
+              if (response && response.status == 200) {
+                setData({
+                  quantity: "Please Select",
+                  flavourName: "Please Select",
+                  price: 0,
+                  priceId: "",
+                });
+                dispatch(fetchPrices());
+              } else {
+                console.log("else 200 condition");
+              }
+            })
+            .catch((err) => console.log(err));
+        } else {
+          payload.priceId = data.priceId;
+          setBtnTitle("Submit");
 
-      const payload = {
-        flavourName: data.flavourName,
-        quantity: data.quantity,
-        price: data.price,
-        priceId: "",
-      };
-      if (btnTitle == "Submit") {
-        axios
-          .post(`${import.meta.env.VITE_API_KEY}/addprices`, payload)
-          .then((response) => {
-            console.log(response);
-            if (response && response.status == 200) {
-              setData({
-                quantity: "Please Select",
-                flavourName: "Please Select",
-                price: 0,
-                priceId: "",
-              });
-              dispatch(fetchPrices());
-            } else {
-              console.log("else 200 condition");
-            }
-          })
-          .catch((err) => console.log(err));
+          axios
+            .put(`${import.meta.env.VITE_API_KEY}/editprices`, payload)
+            .then((response) => {
+              console.log(response);
+              if (response && response.status == 200) {
+                setData({
+                  quantity: "Please Select",
+                  flavourName: "Please Select",
+                  price: 0,
+                  priceId: "",
+                });
+                dispatch(fetchPrices());
+              } else {
+                console.log("else 200 condition");
+              }
+            })
+            .catch((err) => console.log(err));
+        }
       } else {
-        payload.priceId = data.priceId;
-        setBtnTitle("Submit");
-
-        axios
-          .put(`${import.meta.env.VITE_API_KEY}/editprices`, payload)
-          .then((response) => {
-            console.log(response);
-            if (response && response.status == 200) {
-              setData({
-                quantity: "Please Select",
-                flavourName: "Please Select",
-                price: 0,
-                priceId: "",
-              });
-              dispatch(fetchPrices());
-            } else {
-              console.log("else 200 condition");
-            }
-          })
-          .catch((err) => console.log(err));
+        setErrorMessage("Flavour Name and Quantity already exist");
       }
     }
   };
