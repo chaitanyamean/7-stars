@@ -1,13 +1,13 @@
-import { Carousel, Card, Select, Button } from "flowbite-react";
-import { useEffect, useState } from "react";
+// import { Carousel, Card, Select, Button } from "flowbite-react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch } from "../store";
 import { fetchFlavours } from "../slices/flavourSlice";
 
 export const Home = () => {
-  const [data, setData] = useState([
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
-  ]);
+  // const [data, setData] = useState([
+  //   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+  // ]);
 
   const flavourSlice = useSelector((state: any) => state.flavourSlice);
   const dispatch = useDispatch<AppDispatch>();
