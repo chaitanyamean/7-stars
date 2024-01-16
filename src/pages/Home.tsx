@@ -53,14 +53,14 @@ export const Home = () => {
                   {/* </div> */}
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
-                      Neil Sims
+                      {/* Neil Sims */}
                     </p>
                     <p className="truncate text-sm text-gray-500 dark:text-gray-400">
-                      email@windster.com
+                      {/* email@windster.com */}
                     </p>
                   </div>
                   <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                    $320
+                    320
                   </div>
                 </div>
               </span>
