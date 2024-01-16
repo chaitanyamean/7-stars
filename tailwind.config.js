@@ -12,6 +12,9 @@ export default {
       spacing: {
         "1rem": "1rem",
       },
+      colors: {
+        "bg-color": "#f2f2f2",
+      },
     },
   },
   // eslint-disable-next-line no-undef
